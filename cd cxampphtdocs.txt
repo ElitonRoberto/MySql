@@ -1,0 +1,7 @@
+cd c:\xampp\htdocs
+dir
+git clone (repositório do git). vai baixar o código para o repositorio
+
+Abrir o terminal no VsCode
+git log
+git log --oneline
