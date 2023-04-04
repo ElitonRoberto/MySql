@@ -249,7 +249,6 @@ class Paciente extends Crud
     public function atualizar($campo, $id)
     {
     }
-
 }
 
 ?>
