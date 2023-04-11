@@ -39,6 +39,10 @@
                         spl_autoload_register(function ($class) {
                             require_once "./Classes/{$class}.class.php";
                         });
+                        if (filter_has_var(INPUT_GET, "id")) {
+                            $id = filter_input(INPUT_GET, "id");
+
+                        }
                         $paciente = new Paciente();
                         $dadosBanco = $paciente->listar();
                         while ($row = $dadosBanco->fetch_object()) {
@@ -50,7 +54,7 @@
                                             edit_square
                                         </span>
                                     </a>
-                                    <a href="#" class="btn btn-danger">
+                                    <a href="pacienteGer.php?idDel=<?php echo $row->idPac ?>" class="btn btn-danger">
                                         <span class="material-symbols-outlined">
                                             delete
                                         </span>

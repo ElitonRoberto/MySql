@@ -232,11 +232,6 @@ class Paciente extends Crud
             header('location: pacientes.php');
         }
 
-        $sqlAtualizar = "UPDATE $this->tabela SET nomePac='$nome', enderecoPac='$endereco',
-        bairroPac = '$bairro', cidadePac = '$cidade', estadoPac = '$estado', cepPac = '$cep', nascimentoPac = '$nascimento', emailPac = '$email', celularPac = '$celular', fotoPac = '$foto";
-        if (Conexao::query($sqlAtualizar)) {
-            header('location: pacientes.php');
-        }
 
     }
 
@@ -248,6 +243,23 @@ class Paciente extends Crud
      */
     public function atualizar($campo, $id)
     {
+        $nome = $this->getNomePac();
+        $endereco = $this->getEnderecoPac();
+        $bairro = $this->getBairroPac();
+        $cidade = $this->getCidadePac();
+        $estado = $this->getEstadoPac();
+        $cep = $this->getCepPac();
+        $nascimento = $this->getNascimentoPac();
+        $email = $this->getEmailPac();
+        $celular = $this->getCelularPac();
+        $foto = $this->getFotoPac();
+
+        $sqlAtualizar = "UPDATE $this->tabela SET nomePac='$nome', enderecoPac='$endereco',
+        bairroPac = '$bairro', cidadePac = '$cidade', estadoPac = '$estado', cepPac = '$cep', nascimentoPac = '$nascimento', emailPac = '$email', celularPac = '$celular', fotoPac = '$foto'";
+        if (Conexao::query($sqlAtualizar)) {
+            header('location: pacientes.php');
+        }
+
     }
 }
 
