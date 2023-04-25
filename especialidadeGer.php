@@ -13,10 +13,7 @@
 <body>
     <header>
         <nav class="nav">
-            <a class="nav-link active" aria-current="page" href="#">Especialidade</a>
-            <a class="nav-link" href="#">Link</a>
-            <a class="nav-link" href="#">Link</a>
-            <a class="nav-link disabled">Disabled</a>
+            <a class="nav-link" href="#">Especialidade</a>
         </nav>
     </header>
 
