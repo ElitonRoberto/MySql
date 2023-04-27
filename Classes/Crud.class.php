@@ -12,12 +12,13 @@ abstract class Crud
 
     public function buscar($campo, $id){
         $selectSql = "SELECT * FROM {$this->tabela} WHERE $campo = {$id}";
-        $dados = Conexao::query($selectSql);
+        $dados = Conexao:: query($selectSql);
         return $dados->fetch_object();
     }
-    public function deletar($campo,$id){
+    
+    public function deletar($campo, $id){
         $selectSql = "DELETE FROM {$this->tabela} WHERE $campo = {$id}";
-        return Conexao::query($selectSql);
+        return Conexao:: query($selectSql);
     }
 
 }
