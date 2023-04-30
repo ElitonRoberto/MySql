@@ -10,7 +10,7 @@ final class Conexao
     private static function conectar()
     {
         try {
-            if (!(defined('db_user'))) {
+            if (!defined('db_user')) {
                 define('db_user', 'root');
             }
             if (!defined('db_host')) {
@@ -38,5 +38,3 @@ final class Conexao
     }
 
 }
-
-?>

@@ -4,7 +4,7 @@ class Especialidade extends Crud
     protected $tabela = 'Especialidade';
     private $idEsp;
     private $nomeEsp;
-    
+
     /**
      * @return mixed
      */
@@ -44,22 +44,15 @@ class Especialidade extends Crud
     /**
      * @return mixed
      */
-    
+
     public function inserir()
     {
         $nome = $this->getNomeEsp();
-    
 
         $sqlInserir = "INSERT INTO $this->tabela (nomeEsp) VALUES ('$nome')";
         if (Conexao::query($sqlInserir)) {
-            header('location: especialidade.php');
+            header('location: especialidades.php');
         }
-
-        $sqlAtualizar = "UPDATE $this->tabela SET nomeEsp='$nome'";
-        if (Conexao::query($sqlAtualizar)) {
-            header('location: especialidade.php');
-        }
-
     }
 
     /**
@@ -70,8 +63,11 @@ class Especialidade extends Crud
      */
     public function atualizar($campo, $id)
     {
+        $nome = $this->getNomeEsp();
+
+        $sqlAtualizar = "UPDATE $this->tabela SET nomeEsp='$nome' WHERE $campo = {$id}";
+        if (Conexao::query($sqlAtualizar)) {
+            header('location: especialidades.php');
+        }
     }
-
 }
-
-?>

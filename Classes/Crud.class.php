@@ -17,9 +17,8 @@ abstract class Crud
     }
     
     public function deletar($campo, $id){
-        $selectSql = "DELETE FROM {$this->tabela} WHERE $campo = {$id}";
-        return Conexao:: query($selectSql);
+        $deleteSql = "DELETE FROM {$this->tabela} WHERE $campo = {$id}";
+        return Conexao:: query($deleteSql);
     }
 
 }
-?>
