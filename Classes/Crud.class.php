@@ -5,10 +5,10 @@ abstract class Crud
     abstract function inserir();
     abstract function atualizar($campo, $id);
 
-    public function listar(){
+    /*public function listar(){
         $selectSql = "SELECT * FROM {$this->tabela}";
         return Conexao:: query($selectSql);
-    }
+    }*/
 
     public function buscar($campo, $id){
         $selectSql = "SELECT * FROM {$this->tabela} WHERE $campo = {$id}";
@@ -19,6 +19,11 @@ abstract class Crud
     public function deletar($campo, $id){
         $deleteSql = "DELETE FROM {$this->tabela} WHERE $campo = {$id}";
         return Conexao:: query($deleteSql);
+    }
+
+    public function listar($where = null){
+        $selectSql = "SELECT * FROM {$this->tabela} $where";
+        return Conexao:: query($selectSql);
     }
 
 }

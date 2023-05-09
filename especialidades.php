@@ -26,6 +26,24 @@
     <main>
         <div class="mt-3">
             <div class="container">
+            <div class="d-flex flex-row-reverse">
+                    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post"
+                        class="col-mod-6">
+                        <div class="input-group mb-3">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="txtPesquisar" placeholder="Pesquisar"
+                                    name="txtPesquisar">
+                                <label for="pesquisar">Pesquisar</label>
+                            </div>
+                            <button class="btn btn-outline-secondary" type="submit" id="btnPesquisar"
+                                name="btnPesquisar">
+                                <span class="material-symbols-outlined">
+                                    search
+                                </span>
+                            </button>
+                        </div>
+                </div>
+
                 <table class="table">
                     <thead>
                         <tr>
@@ -38,11 +56,19 @@
                         spl_autoload_register(function ($class) {
                             require_once "./Classes/{$class}.class.php";
                         });
-                        if (filter_has_var(INPUT_GET, "id")) {
+                        /*if (filter_has_var(INPUT_GET, "id")) {
                             $id = filter_input(INPUT_GET, "id");
-                        }
+                        }*/
                         $especialidade = new Especialidade();
-                        $dadosBanco = $especialidade->listar();
+                        if (filter_has_var(INPUT_POST, 'txtPesquisar')) {
+                            $parametro = filter_input(INPUT_POST, 'txtPesquisar');
+                            $where = "where(nomeEsp like '%$parametro%')";
+                            $dadosBanco = $especialidade->listar($where);
+                        } else {
+                            $dadosBanco = $especialidade->listar();
+                        }
+
+                        //$dadosBanco = $especialidade->listar();
                         while ($row = $dadosBanco->fetch_object()) {
                         ?>
                             <tr>

@@ -23,7 +23,7 @@ final class Conexao
                 define('db_name', 'clinica');
             }
             if (!defined('db_port')) {
-                define('db_port', '3306');
+                define('db_port', '3360');
             }
             $db = new mysqli(db_host, db_user, db_pass, db_name, db_port);
             return $db;
