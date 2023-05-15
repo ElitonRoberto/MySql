@@ -45,76 +45,69 @@
 
                 $medico = new Medico();
                 $id = filter_input(INPUT_POST, 'txtId');
-                $paciente->setIdPac($id);
-                $paciente->setNomePac(filter_input(INPUT_POST, 'txtNome'));
-                $paciente->setEnderecoPac(filter_input(INPUT_POST, 'txtEndereco'));
-                $paciente->setBairroPac(filter_input(INPUT_POST, 'txtBairro'));
-                $paciente->setCidadePac(filter_input(INPUT_POST, 'txtCidade'));
-                $paciente->setEstadoPac(filter_input(INPUT_POST, 'sltEstado'));
-                $paciente->setCepPac(filter_input(INPUT_POST, 'txtCep'));
-                $paciente->setNascimentoPac(filter_input(INPUT_POST, 'txtNascimento'));
-                $paciente->setEmailPac(filter_input(INPUT_POST, 'txtEmail'));
-                $paciente->setFotoPac($nomeArq);
+                $medico->setIdMed($id);
+                $medico->setNomeMed(filter_input(INPUT_POST, 'txtNome'));
+                $medico->setEmailMed(filter_input(INPUT_POST, 'txtEmail'));
+                $medico->setCelularMed(filter_input(INPUT_POST, 'txtCelular'));
+                $medico->setEspecialidadeMed(filter_input(INPUT_POST, 'sltEspecialidade'));
+                $medico->setCrmMed(filter_input(INPUT_POST, 'txtCrm'));
+
                 if (empty($id)) {
-                    $paciente->inserir();
+                    $medico->inserir();
                 } else {
-                    $paciente->atualizar('idPac', $id);
+                    $medico->atualizar('idPac', $id);
                 }
             }
             ?>
 
             <form class="row g-3" action="<?php echo
                                             htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" enctype="multipart/form-data">
-                <input type="hidden" name="txtId" value="<?php echo isset($editPac->idPac) ? $editPac->idPac : null; ?>">
-
-                <input type="hidden" name="nomeAntigo" value="<?php echo isset($editPac->fotoPac) ? $editPac->fotoPac : null; ?>">
-
+                <input type="hidden" name="txtId" value="<?php echo isset($editMed->idMed) ? $editMed->idMed : null; ?>">
 
                 <div class="col-12">
                     <label for="txtNome" class="form-label">Nome</label>
-                    <input type="text" class="form-control" id="txtNome" placeholder="Digite seu nome..." name="txtNome" value="<?php echo isset($editPac->nomePac) ? $editPac->nomePac : NULL; ?>">
+                    <input type="text" class="form-control" id="txtNome" placeholder="Digite seu nome..." name="txtNome" value="<?php echo isset($editMed->nomeMed) ? $editMed->nomeMed : NULL; ?>">
                 </div>
 
                 <div class="col-6">
                     <label for="txtEmail" class="form-label">E-mail</label>
-                    <input type="email" class="form-control" id="txtEmail" placeholder="Digite seu email..." name="txtEmail" value="<?php echo isset($editPac->emailPac) ? $editPac->emailPac : NULL; ?>">
+                    <input type="email" class="form-control" id="txtEmail" placeholder="Digite seu email..." name="txtEmail" value="<?php echo isset($editMed->emailMed) ? $editMed->emailMed : NULL; ?>">
                 </div>
 
                 <div class="col-md-6">
                     <label for="txtCelular" class="form-label">Celular</label>
-                    <input type="text" class="form-control" id="txtCelular" name="txtCelular" value="<?php echo isset($editPac->celularPac) ? $editPac->celularPac : NULL; ?>">
+                    <input type="text" class="form-control" id="txtCelular" name="txtCelular" value="<?php echo isset($editMed->celularMed) ? $editMed->celularMed : NULL; ?>">
                 </div>
 
                 <div class="col-md-6">
                     <label for="sltEspecialidade" class="form-label">Especialidade</label>
-                    <?php $espSel = isset($medEdit->estadoPac) ? $editPac->estadoPac : null; ?>
-                    <select id="sltEspecialidade" class="form-select" name="sltEspecialidade">
-                        <option value="" selected hidden>Escolha...</option>
-                        
-                        
-                        <option value="<?php echo $row->idEsp?>"
-                        <?php if ($espSel === $row->idEsp) {
-                                                echo 'selected';
-                                            }?>>
-                                            <?php echo $row->nomeEsp?>
-                                            </option>
-                                            <?php}?>
 
-                        <option value="AL" <?php
-                                            if ($estadoSelec == "AL") {
-                                                echo 'selected';
-                                            }
-                                            ?>>Alagoas</option>
+                    <select id="sltEspecialidade" class="form-select" name="sltEspecialidade">
+                        <?php $espSel = isset($editMed->especialidadeMed) ? $editMed->especialidadeMed : null; ?>
+                        <option value="" selected hidden>Escolha...</option>
+
+                        <?php
+                        $especialidade = new Especialidade;
+                        $dadosBanco = $especialidade->listar();
+                        while ($row = $dadosBanco->fetch_object()) {
+                        ?>
+                        <option value="<?php echo $row->idEsp ?>" <?php
+                             if ($espSel === $row->idEsp) {
+                                    echo 'selected';
+                                } ?>>
+                                <?php echo $row->nomeEsp ?>
+                            </option>
+                        <?php } ?>
 
                     </select>
                 </div>
 
                 <div class="col-6">
                     <label for="txtCrm" class="form-label">CRM</label>
-                    <input type="text" class="form-control" id="txtCrm" placeholder="Digite seu CRM..." name="txtCrm" value="<?php echo isset($editPac->enderecoPac) ? $editPac->enderecoPac : NULL; ?>">
-                </div>              
+                    <input type="text" class="form-control" id="txtCrm" placeholder="Digite seu CRM..." name="txtCrm" value="<?php echo isset($editMed->crmMed) ? $editMed->crmMed : NULL; ?>">
+                </div>
 
-               
+
                 <div class="col-12">
                     <button type="submit" class="btn btn-primary" name="btnGravar">Gravar</button>
                 </div>
