@@ -19,9 +19,9 @@
         <nav class="nav">
             <!--Ta feio esse menu, vou modificar posteriormente-->
             <a class="nav-link" href="#">Clinica</a>
-            <a class="nav-link" href="#">Médicos</a>
+            <a class="nav-link" href="medicos.php">Médicos</a>
             <a class="nav-link" href="especialidades.php">Especialidades</a>
-            <a class="nav-link" href="#">Consultas</a>
+            <a class="nav-link" href="consultas.php">Consultas</a>
             <a class="nav-link" href="pacientes.php">Pacientes</a>
         </nav>
     </header>
@@ -110,7 +110,7 @@
 
                 <div>
                     <a href="medicoGer.php" class="btn btn-primary"><span
-                            class="material-symbols-outlined">note_add</span>Novo Medico</a>
+                            class="material-symbols-outlined">note_add</span>Novo Médico</a>
                 </div>
             </div>
         </div>

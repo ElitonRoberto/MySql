@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-    <title>Especialidade</title>
+    <title>Consultas</title>
 </head>
 
 <body>
@@ -28,42 +28,62 @@
             });
 
             if (filter_has_var(INPUT_GET, 'id')) {
-                $especialidade = new Especialidade();
+                $consulta = new Consulta();
                 $id = filter_input(INPUT_GET, 'id');
-                $editEsp = $especialidade->buscar('idEsp', $id);
+                $editCon = $consulta->buscar('idCon', $id);
             }
 
             if (filter_has_var(INPUT_GET, 'idDel')) {
-                $especialidade = new Especialidade();
+                $consulta = new Consulta();
                 $id = filter_input(INPUT_GET, 'idDel');
-                if ($especialidade->deletar('idEsp', $id)) {
-                    header("location:especialidades.php");
+                if ($consulta->deletar('idCon', $id)) {
+                    header("location:consultas.php");
                 }
             }
 
             if (filter_has_var(INPUT_POST, 'btnGravar')) {
-                $especialidade = new Especialidade();
+
+                $consulta = new Consulta();
                 $id = filter_input(INPUT_POST, 'txtId');
-                $especialidade->setIdEsp($id);
-                $especialidade->setNomeEsp(filter_input(INPUT_POST, 'txtNome'));
+                $consulta->setIdCon($id);
+                $consulta->setPacienteCon(filter_input(INPUT_POST, 'txtPaciente'));
+                $consulta->setMedicoCon(filter_input(INPUT_POST, 'txtMedico'));
+                $consulta->setDataCon(filter_input(INPUT_POST, 'txtData'));
+                $consulta->setHoraCon(filter_input(INPUT_POST, 'txtHora'));
 
                 if (empty($id)) {
-                    $especialidade->inserir();
+                    $consulta->inserir();
                 } else {
-                    $especialidade->atualizar('idEsp', $id);
+                    $consulta->atualizar('idCon', $id);
                 }
             }
             ?>
 
             <form class="row g-3" action="<?php echo
                                             htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" enctype="multipart/form-data">
-                <input type="hidden" name="txtId" value="<?php echo isset($editEsp->idEsp) ? $editEsp->idEsp : null; ?>">
+                <input type="hidden" name="txtId" value="<?php echo isset($editCon->idCon) ? $editCon->idCon : null; ?>">
 
-
-                <div class="col-12">
-                    <label for="txtNome" class="form-label">Nome da Especialidade</label>
-                    <input type="text" class="form-control" id="txtNome" placeholder="Digite o nome..." name="txtNome">
+                <div class="col-6">
+                    <label for="txtPaciente" class="form-label">Paciente</label>
+                    <input type="text" class="form-control" id="txtPaciente" placeholder="Digite o nome do paciente..." name="txtPaciente" value="<?php echo isset($editCon->pacienteCon) ? $editCon->pacienteCon : NULL; ?>">
                 </div>
+
+                <div class="col-6">
+                    <label for="txtMedico" class="form-label">Médico</label>
+                    <input type="text" class="form-control" id="txtMedico" placeholder="Digite o nome do médico..." name="txtMedico" value="<?php echo isset($editCon->medicoCon) ? $editCon->medicoCon : NULL; ?>">
+                </div>
+
+                <div class="col-md-6">
+                    <label for="txtData" class="form-label">Data</label>
+                    <input type="date" class="form-control" id="txtData" name="txtData" value="<?php echo isset($editCon->dataCon) ? $editCon->dataCon : NULL; ?>">
+                </div>
+
+                
+                <div class="col-6">
+                    <label for="txtHora" class="form-label">Hora</label>
+                    <input type="time" class="form-control" id="txtHora" name="txtHora" value="<?php echo isset($editCon->horaCon) ? $editCon->horaCon : NULL; ?>">
+                </div>
+
 
                 <div class="col-12">
                     <button type="submit" class="btn btn-primary" name="btnGravar">Gravar</button>

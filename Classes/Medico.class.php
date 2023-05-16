@@ -140,7 +140,7 @@ class Medico extends Crud
      * @param mixed $id
      * @return mixed
      */
-    public function atualizar($campo, $id) //arrumar
+    public function atualizar($campo, $id)
     {
         $especialidade = $this->getEspecialidadeMed();
         $nome = $this->getNomeMed();

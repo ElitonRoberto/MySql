@@ -15,7 +15,7 @@
             <a class="nav-link" href="#">Clinica</a>
             <a class="nav-link" href="medicos.php">Médicos</a>
             <a class="nav-link" href="especialidades.php">Especialidades</a>
-            <a class="nav-link" href="#">Consultas</a>
+            <a class="nav-link" href="consultas.php">Consultas</a>
             <a class="nav-link" href="pacientes.php">Pacientes</a>
         </nav>
     </header>
@@ -55,7 +55,7 @@
                 if (empty($id)) {
                     $medico->inserir();
                 } else {
-                    $medico->atualizar('idPac', $id);
+                    $medico->atualizar('idMed', $id);
                 }
             }
             ?>
